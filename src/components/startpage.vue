@@ -1,28 +1,83 @@
 <template>
   <div>
-    <h1>Välkommen</h1>
-    <em> Någon text om samhällsnytta </em>
-    <div class="menu-buttons">
-      <hButton text="Visa ärenden" color="lightblue" :fullWidth="false" />
-      <hButton text="Information" color="lightblue" :fullWidth="false" />
-      <hButton text="Skapa konto" color="lightblue" :fullWidth="false" />
+    <div class="main-content-holder">
+      <div class="text-holder">
+        <div class="header-text">
+          Bacon ipsum dolor amet biltong drumstick
+        </div>
+        <div class="sub-text">
+          Tail beef shankle biltong, kevin chislic shank pork meatball. Salami
+          capicola pork kevin buffalo drumstick turkey pork loin filet mignon
+          sausage short ribs.
+        </div>
+
+        <div class="menu-buttons">
+          <hButton
+            text="Visa uppdrag"
+            color="pink"
+            size="medium"
+            @onClick="showMissions"
+          />
+          <hButton text="Skapa uppdrag" color="white" size="medium" />
+        </div>
+      </div>
+      <div class="image-holder">
+        <img
+          src="https://www.digitalartsonline.co.uk/cmsdata/features/3785691/free-black-illustrations.jpg"
+          width="350px"
+        />
+      </div>
     </div>
   </div>
 </template>
 <script>
 import hButton from "../components/elements/hButton";
+import { mapActions } from "vuex";
 export default {
   name: "startpage",
   components: {
     hButton
+  },
+  methods: {
+    ...mapActions(["setField"]),
+    showMissions() {
+      this.setField({ group: "session", field: "showMissions", value: true });
+    }
   }
 };
 </script>
 <style lang="scss" scoped>
+.main-content-holder {
+  padding: 70px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-bottom: 2px solid #f3f3f4;
+}
+
+.header-text {
+  text-align: left;
+  font-family: Montserrat;
+  font-size: 36px;
+  font-weight: 500;
+  color: #000000;
+}
+.sub-text {
+  text-align: left;
+  font-family: Montserrat;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1.6;
+  color: #000000;
+}
+
+.image-holder {
+  width: 300px;
+}
 .menu-buttons {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: 1fr 1fr;
   grid-gap: 10px;
-  padding: 20px;
+  width: 300px;
+  padding-top: 20px;
 }
 </style>

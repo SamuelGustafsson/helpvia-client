@@ -1,21 +1,29 @@
 <template>
   <div id="app">
     <pageHeader />
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <startpage />
+    <startpage v-if="!showMissions" />
+    <missions v-else />
   </div>
 </template>
 
 <script>
 import startpage from "./components/startpage.vue";
 import pageHeader from "./components/pageHeader.vue";
+import missions from "./components/missions.vue";
 
 export default {
   name: "App",
   components: {
     startpage,
-    pageHeader
-  }
+    pageHeader,
+    missions
+  },
+  computed: {
+    showMissions() {
+      return this.$store.state.session.showMissions.value || null;
+    }
+  },
+  methods: {}
 };
 </script>
 

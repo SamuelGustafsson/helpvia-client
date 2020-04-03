@@ -1,0 +1,26 @@
+[
+  {
+    "id": "1",
+    "category": "GROCERIES",
+    "phone": "0701234567",
+    "municipality": "Nässjö",
+    "donation": "50kr",
+    "freeText": "Jag vill ha hjälp med att handla grönsaker. Jag behöver dessa innan fredag."
+  },
+  {
+    "id": "2",
+    "category": "CUTTHELAWN",
+    "phone": "0701234567",
+    "municipality": "Jönköping",
+    "donation": "300kr",
+    "freeText": "Gräset behöver klippas på min tomt."
+  },
+  {
+    "id": "3",
+    "category": "MAIL",
+    "phone": "0701234567",
+    "municipality": "Ale",
+    "donation": "100kr",
+    "freeText": "Kan inte hämta posten själv. Behöver hjälp med detta. Posten finns på ica maxi på Kungsgatan 23"
+  }
+]

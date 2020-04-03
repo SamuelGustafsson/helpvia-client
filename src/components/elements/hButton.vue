@@ -19,7 +19,8 @@ export default {
       type: String
     },
     fullWidth: {
-      type: Boolean
+      type: Boolean,
+      default: false
     },
     size: {
       type: String,
@@ -36,12 +37,17 @@ export default {
 <style lang="scss" scoped>
 .base-button {
   height: 40px;
-  border-radius: 10px;
+  border-radius: 8px;
   font-family: sans-serif;
   font-size: 14px;
 }
 .fullWidth {
   width: 100%;
+}
+.white {
+  background-color: white;
+  color: black;
+  border: 1px solid #d95988;
 }
 .red {
   background-color: red;
@@ -52,8 +58,8 @@ export default {
   color: black;
 }
 .pink {
-  background-color: #f4d8e4;
-  color: black;
+  background-color: #d95988;
+  color: white;
 }
 .small {
   width: 100px;
