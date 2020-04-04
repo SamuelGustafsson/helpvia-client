@@ -3,7 +3,7 @@
     <div class="main-content-holder">
       <div class="text-holder">
         <div class="header-text">
-          Bacon ipsum dolor amet biltong drumstick
+          Vi finns till för att hjälpa er att hjälpa varandra genom krisen
         </div>
         <div class="sub-text">
           Tail beef shankle biltong, kevin chislic shank pork meatball. Salami
@@ -41,7 +41,6 @@ export default {
   methods: {
     ...mapActions(["setField"]),
     showMissions() {
-      console.log("show");
       this.$router.push("missions");
     }
   }
@@ -67,6 +66,7 @@ export default {
   font-size: 36px;
   font-weight: 500;
   color: #000000;
+  padding-bottom: 10px;
 }
 .sub-text {
   text-align: left;
