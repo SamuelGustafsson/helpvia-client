@@ -6,13 +6,13 @@
         <hButton
           text="Logga in"
           color="white"
-          size="small"
+          size="xsmall"
           @onClick="goToRoute('login')"
         />
         <hButton
           text="Registrera"
           color="pink"
-          size="small"
+          size="xsmall"
           @onClick="goToRoute('register')"
         />
       </div>
@@ -28,16 +28,16 @@ import hButton from "../components/elements/hButton";
 export default {
   name: "pageHeader",
   components: {
-    hButton,
+    hButton
   },
   data() {
     return { toggleLogin: false };
   },
   methods: {
-    goToRoute(route) {      
+    goToRoute(route) {
       router.history.current.name !== route && router.push(route);
-    },
-  },
+    }
+  }
 };
 </script>
 <style lang="scss" scoped>

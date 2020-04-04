@@ -15,10 +15,10 @@
           <hButton
             text="Visa uppdrag"
             color="pink"
-            size="medium"
+            size="small"
             @onClick="showMissions"
           />
-          <hButton text="Skapa uppdrag" color="white" size="medium" />
+          <hButton text="Skapa uppdrag" color="white" size="small" />
         </div>
       </div>
       <div class="image-holder">
@@ -41,6 +41,7 @@ export default {
   methods: {
     ...mapActions(["setField"]),
     showMissions() {
+      console.log("show");
       this.$router.push("missions");
     }
   }
@@ -85,9 +86,12 @@ export default {
 }
 .menu-buttons {
   display: grid;
-  grid-template-columns: 1fr 1fr;
   grid-gap: 10px;
   width: 300px;
   padding-top: 20px;
+  grid-template-columns: 1fr 1fr;
+  justify-content: left;
+  @media screen and (min-width: 480px) {
+  }
 }
 </style>
