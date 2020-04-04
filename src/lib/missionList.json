@@ -22,5 +22,29 @@
     "municipality": "Ale",
     "donation": "100kr",
     "freeText": "Kan inte hämta posten själv. Behöver hjälp med detta. Posten finns på ica maxi på Kungsgatan 23"
+  },
+  {
+    "id": "4",
+    "category": "MAIL",
+    "phone": "0701234567",
+    "municipality": "Eksjö",
+    "donation": "0kr",
+    "freeText": "Behöver hämta paket på schenkers ombud på Trädgatan 4"
+  },
+  {
+    "id": "5",
+    "category": "GROCERIES",
+    "phone": "0701234567",
+    "municipality": "Gotland",
+    "donation": "500kr",
+    "freeText": "Storhandling. Har inköpslista."
+  },
+  {
+    "id": "6",
+    "category": "GROCERIES",
+    "phone": "0701234567",
+    "municipality": "Jönköping",
+    "donation": "100kr",
+    "freeText": "Behöver städartiklar från ica"
   }
 ]
