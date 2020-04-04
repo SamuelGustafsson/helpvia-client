@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="add-mission-holder">
+    <div v-if="!succesfulPost" class="add-mission-holder">
       <div class="header-text">
         <h2>Lägg till nytt uppdrag</h2>
       </div>
@@ -52,6 +52,12 @@
         </div>
       </div>
     </div>
+    <div v-else-if="succesfulPost" class="succesful-post">
+      <h2>Klart!</h2>
+      Ärendet är upplagt<br />
+      När någon väljer ditt ärende kontaktar hen dig för mer information <br />
+      Tack för att du stannar hemma i coronakrisen!
+    </div>
   </div>
 </template>
 <script>
@@ -61,6 +67,8 @@ import hInput from "../components/elements/hInput.vue";
 import hTextArea from "../components/elements/hTextArea.vue";
 import municipalities from "../lib/municipalities.json";
 import missionList from "../lib/missionList.json";
+import axios from "axios";
+import { mapActions } from "vuex";
 
 export default {
   name: "addMissionCard",
@@ -75,7 +83,7 @@ export default {
       categories: [
         { id: "GROCERIES", value: "Köp av matvaror" },
         { id: "MAIL", value: "Hämta post" },
-        { id: "CUTHELAWN", value: "Klippa gräsmatta" },
+        { id: "CUTTHELAWN", value: "Klippa gräsmatta" },
         { id: "OTHER", value: "Annat" }
       ],
       municipalities,
@@ -84,7 +92,8 @@ export default {
       phoneNumber: null,
       freeText: null,
       donation: null,
-      missionList
+      missionList,
+      succesfulPost: null
     };
   },
   computed: {
@@ -98,6 +107,7 @@ export default {
     }
   },
   methods: {
+    ...mapActions(["setField"]),
     onChangeCategory(event) {
       this.selectedCategory = this.categories.find(a => a.value === event);
     },
@@ -116,16 +126,34 @@ export default {
     onInputDonation(value) {
       this.donation = value;
     },
+    saveMission(mission) {
+      axios
+        .post("http://localhost:3000/missions", {
+          ...mission
+        })
+        .then(() => {
+          this.succesfulPost = true;
+        })
+        .catch(() => {
+          this.succesfulPost = false;
+        });
+    },
     addMission() {
-      console.log("selectedMunicipality");
-      /* const missionObject = {
+      const missionObject = {
         category: this.selectedCategory.id,
         phone: this.phoneNumber,
         municipality: this.selectedMunicipality.value,
         donation: this.donation,
         freeText: this.freeText,
-        status: "CREATED_MISSION"
-      };*/
+        status: "MISSION_CREATED"
+      };
+      this.saveMission(missionObject);
+      this.updateMissions();
+    },
+    updateMissions() {
+      axios.get("http://localhost:3000/missions").then(response => {
+        this.setField({ field: "missions", value: response.data });
+      });
     }
   }
 };
@@ -174,5 +202,9 @@ export default {
 .filter-text {
   display: grid;
   align-items: center;
+}
+.succesful-post {
+  padding: 40px;
+  margin: 50px;
 }
 </style>

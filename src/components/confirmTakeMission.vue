@@ -23,7 +23,11 @@
       <div><span class="label">Donation </span>{{ takenMission.donation }}</div>
     </div>
     <div class="button-holder">
-      <hButton text="Bekräfta" color="pink" />
+      <hButton
+        text="Bekräfta"
+        color="pink"
+        @onClick="confirmMission(takenMission.id)"
+      />
       <hButton text="Avbryt" color="white" />
     </div>
   </div>
@@ -55,6 +59,9 @@ export default {
   methods: {
     mapCategory(category) {
       return this.categories.find(a => a.id === category).value;
+    },
+    confirmMission(id) {
+      console.log("id", id);
     }
   }
 };

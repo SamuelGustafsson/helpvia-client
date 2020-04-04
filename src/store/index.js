@@ -6,11 +6,11 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     user: null,
+    missions: null
   },
   actions: {
-    setField(context, { value, group, field }) {
+    setField(context, { value, field }) {
       context.commit("updateField", {
-        group,
         field,
         value
       });
@@ -18,9 +18,8 @@ export default new Vuex.Store({
   },
   mutations: {
     updateField(state, payload) {
-      const { group, field } = payload;
-
-      Vue.set(state[group][field], "value", payload.value);
+      const { field } = payload;
+      Vue.set(state, field, payload.value);
     }
   },
 

@@ -40,10 +40,11 @@
   </div>
 </template>
 <script>
-import missionList from "./../lib/missionList.json";
 import hButton from "../components/elements/hButton";
 import locationIcon from "../assets/locationIcon.svg";
 import confirmTakeMission from "../components/confirmTakeMission.vue";
+import axios from "axios";
+import { mapActions } from "vuex";
 export default {
   name: "missionList",
   components: {
@@ -63,7 +64,7 @@ export default {
   data() {
     return {
       locationIcon,
-      missionList,
+      missionList: [],
       takenMission: null,
       categories: [
         { id: "GROCERIES", value: "Köp av matvaror" },
@@ -73,6 +74,10 @@ export default {
       ]
     };
   },
+  created() {
+    this.updateMissions();
+    console.log("this.missionList", this.missionList);
+  },
   computed: {
     missionListParsedByCategory() {
       return this.filterCategory
@@ -80,7 +85,6 @@ export default {
         : this.missionList;
     },
     missionListParsedByMunicipality() {
-      console.log("missionList", this.missionList);
       return this.filterMunicipality
         ? this.missionList.filter(
             a => a.municipality === this.filterMunicipality.value
@@ -96,11 +100,20 @@ export default {
     }
   },
   methods: {
+    ...mapActions(["setField"]),
     mapCategory(category) {
+      console.log("categoru", category);
       return this.categories.find(a => a.id === category).value;
     },
     takeMission(mission) {
       this.takenMission = mission;
+    },
+    updateMissions() {
+      axios.get("http://localhost:3000/missions").then(response => {
+        console.log("response", response.data);
+        this.missionList = response.data;
+        this.setField({ field: "missions", value: response.data });
+      });
     }
   }
 };

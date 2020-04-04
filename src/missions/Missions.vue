@@ -49,6 +49,7 @@ import missionList from "./missionList.vue";
 import addMissionCard from "./addMissionCard.vue";
 import municipalities from "../lib/municipalities.json";
 import plusCircleSolid from "../assets/plus-circle-solid.svg";
+
 export default {
   name: "Missions",
   components: {
