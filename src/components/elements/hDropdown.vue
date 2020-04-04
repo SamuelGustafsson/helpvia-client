@@ -1,6 +1,7 @@
 <template>
   <div>
-    <select class="select" @change="onChange($event.target.value)">
+    <select :class="[size, 'select']" @change="onChange($event.target.value)">
+      <option value="" disabled selected>{{ label }}</option>
       <option
         v-for="(option, index) in items"
         :value="option.value"
@@ -20,6 +21,13 @@ export default {
       default() {
         return [];
       }
+    },
+    label: {
+      type: String
+    },
+    size: {
+      type: String,
+      default: "medium"
     }
   },
   methods: {
@@ -31,12 +39,21 @@ export default {
 </script>
 <style lang="scss" scoped>
 .select {
-  width: 200px;
+  width: 250px;
   height: 40px;
   background-color: white;
   border-radius: 10px;
   font-family: Montserrat;
   font-size: 15px;
-  border: 1px solid lightgray;
+  border: 1px solid #a8b2dd;
+}
+.small {
+  width: 100px;
+}
+.medium {
+  width: 200px;
+}
+.large {
+  width: 275px;
 }
 </style>

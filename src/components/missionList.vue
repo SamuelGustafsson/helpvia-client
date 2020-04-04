@@ -6,35 +6,48 @@
       class="mission-card"
     >
       <div class="mission-card-item">
-        <span class="label">Kategori </span>{{ mapCategory(mission.category) }}
+        <span class="category-label">{{ mapCategory(mission.category) }} </span>
+        <span class="Municipality-label">
+          <div class="location-icon-image">
+            <img :src="locationIcon" width="15px" />
+          </div>
+
+          {{ mission.municipality }}
+        </span>
       </div>
-      <div class="mission-card-item">
-        <span class="label">Telefonnummer </span> {{ mission.phone }}
+      <div>
+        {{ mission.freeText }}
       </div>
+
+      <div><span class="label">Donation </span>{{ mission.donation }}</div>
       <div class="mission-card-item">
-        <span class="label">Stad </span> {{ mission.municipality }}
-      </div>
-      <div class="mission-card-item">
-        <span class="label">Text </span> {{ mission.freeText }}
-      </div>
-      <div class="mission-card-item">
-        <span class="label">Donation </span>{{ mission.donation }}
+        <hButton text="Ta uppdrag" color="dusk" size="small"> </hButton>
       </div>
     </div>
   </div>
 </template>
 <script>
 import missionList from "./../lib/missionList.json";
+import hButton from "../components/elements/hButton";
+import locationIcon from "../assets/locationIcon.svg";
 export default {
   name: "missionList",
+  components: {
+    hButton
+  },
   props: {
     filterCategory: {
+      type: Object,
+      default: null
+    },
+    filterMunicipality: {
       type: Object,
       default: null
     }
   },
   data() {
     return {
+      locationIcon,
       missionList,
       categories: [
         { id: "GROCERIES", value: "Köp av matvaror" },
@@ -45,10 +58,23 @@ export default {
     };
   },
   computed: {
-    missionListParsed() {
+    missionListParsedByCategory() {
       return this.filterCategory
         ? this.missionList.filter(a => a.category === this.filterCategory.id)
         : this.missionList;
+    },
+    missionListParsedByMunicipality() {
+      console.log("missionList", this.missionList);
+      return this.filterMunicipality
+        ? this.missionList.filter(
+            a => a.municipality === this.filterMunicipality.value
+          )
+        : this.missionList;
+    },
+    missionListParsed() {
+      return this.missionListParsedByCategory.filter(
+        value => -1 !== this.missionListParsedByMunicipality.indexOf(value)
+      );
     }
   },
   methods: {
@@ -61,19 +87,38 @@ export default {
 <style lang="scss" scoped>
 .mission-holder {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   grid-gap: 30px;
   padding-top: 40px;
+  @media screen and (min-width: 900px) {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 .mission-card {
   display: grid;
   grid-gap: 10px;
   text-align: left;
   padding: 30px;
-  border: 1px solid lightgray;
+  background-color: #f9f9f9;
 }
 .mission-card-item {
   display: grid;
   grid-template-columns: 1fr 1fr;
+}
+.category-label {
+  font-family: Montserrat;
+  font-weight: 600;
+}
+.Municipality-label {
+  display: grid;
+  align-items: center;
+  grid-template-columns: 1fr max-content;
+  grid-gap: 10px;
+  font-family: Montserrat;
+  font-weight: 600;
+  text-align: right;
+}
+.location-icon-image {
+  align-items: right;
 }
 </style>

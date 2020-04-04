@@ -1,7 +1,7 @@
 <template>
   <div>
     <textarea
-      class="text-area-field"
+      :class="[size, 'text-area-field']"
       :placeholder="placeholder"
       @input="onInput($event.target.value)"
     />
@@ -14,6 +14,10 @@ export default {
     placeholder: {
       type: String,
       default: ""
+    },
+    size: {
+      type: String,
+      default: "medium"
     }
   },
   methods: {
@@ -25,16 +29,27 @@ export default {
 </script>
 <style lang="scss" scoped>
 .text-area-field {
-  width: 185px;
-  max-width: 185px;
-  min-width: 185px;
   height: 150px;
   background-color: white;
   border-radius: 8px;
   font-family: Montserrat;
   font-size: 15px;
-  padding-left: 15px;
-  padding-top: 15px;
-  border: 1px solid lightgray;
+  padding: 15px;
+  border: 1px solid #a8b2dd;
+}
+.small {
+  width: 70px;
+  max-width: 70px;
+  min-width: 70px;
+}
+.medium {
+  width: 200px;
+  max-width: 200px;
+  min-width: 200px;
+}
+.large {
+  width: 243px;
+  max-width: 243px;
+  min-width: 243px;
 }
 </style>

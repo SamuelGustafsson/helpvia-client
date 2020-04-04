@@ -61,10 +61,17 @@ export default {
   background-color: #d95988;
   color: white;
 }
+.dusk {
+  background-color: #434971;
+  color: white;
+}
 .small {
   width: 100px;
 }
 .medium {
-  width: 150px;
+  width: 200px;
+}
+.large {
+  width: 275px;
 }
 </style>

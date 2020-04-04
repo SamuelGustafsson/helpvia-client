@@ -14,15 +14,20 @@
           <span class="filter-text">
             Kategori:
           </span>
-          <hDropdown :items="categories" @onChange="onChangeCategory" />
+          <hDropdown
+            label="Kategori"
+            :items="categories"
+            @onChange="onChangeCategory"
+          />
         </div>
         <div class="filter-item">
           <span class="filter-text">
             Stad:
           </span>
           <hDropdown
+            label="Stad"
             :items="municipalityOptions"
-            @onChange="onChangeCategory"
+            @onChange="onChangeMunicipality"
           />
         </div>
       </div>
@@ -30,7 +35,10 @@
     <div v-if="expandAddMission">
       <addMissionCard />
     </div>
-    <missionList :filterCategory="selectedCategory" />
+    <missionList
+      :filterCategory="selectedCategory"
+      :filterMunicipality="selectedMunicipality"
+    />
   </div>
 </template>
 <script>
@@ -56,7 +64,7 @@ export default {
         { id: "OTHER", value: "Annat" }
       ],
       selectedCategory: null,
-      selectedCity: null,
+      selectedMunicipality: null,
       expandAddMission: false,
       municipalities
     };
@@ -75,8 +83,10 @@ export default {
     onChangeCategory(event) {
       this.selectedCategory = this.categories.find(a => a.value === event);
     },
-    onChangeCity(event) {
-      this.selectedCity = event;
+    onChangeMunicipality(event) {
+      this.selectedMunicipality = this.municipalityOptions.find(
+        a => a.value === event
+      );
     }
   }
 };

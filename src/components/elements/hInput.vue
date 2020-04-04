@@ -1,7 +1,7 @@
 <template>
   <div>
     <input
-      class="input-field"
+      :class="[size, 'input-field']"
       :placeholder="placeholder"
       @input="onInput($event.target.value)"
     />
@@ -20,6 +20,10 @@ export default {
     placeholder: {
       type: String,
       default: ""
+    },
+    size: {
+      type: String,
+      default: "medium"
     }
   },
   methods: {
@@ -31,13 +35,21 @@ export default {
 </script>
 <style lang="scss" scoped>
 .input-field {
-  width: 185px;
   height: 40px;
   background-color: white;
   border-radius: 8px;
   font-family: Montserrat;
   font-size: 15px;
   padding-left: 15px;
-  border: 1px solid lightgray;
+  border: 1px solid #a8b2dd;
+}
+.small {
+  width: 100px;
+}
+.medium {
+  width: 182px;
+}
+.large {
+  width: 257px;
 }
 </style>

@@ -6,30 +6,44 @@
       </div>
       <div class="input-fields">
         <div class="input-field-item">
-          <span class="input-field-item-label"> Kategori</span>
-          <hDropdown :items="categories" @onChange="onChangeCategory" />
-        </div>
-        <div class="input-field-item">
-          <span class="input-field-item-label"> Telefonnummer</span>
-          <hInput placeholder="07X XX XX XXX" @onInput="onInputPhone" />
-        </div>
-        <div class="input-field-item">
-          <span class="input-field-item-label"> Stad</span>
-          <hDropdown :items="municipalityOptions" @onChange="onChangeCity" />
-        </div>
-        <div class="input-field-item">
-          <span class="input-field-item-label"> Fritext</span>
-          <hTextArea
-            placeholder="Fyll i det som krävs för att utföra uppdraget."
-            @onInput="onInputFreeText"
+          <hDropdown
+            label="Kategori"
+            :items="categories"
+            @onChange="onChangeCategory"
+            size="large"
           />
         </div>
         <div class="input-field-item">
-          <span class="input-field-item-label"> Donation (valfri)</span>
-          <hInput placeholder="X kr" @onInput="onInputDonation" />
+          <hInput
+            placeholder="Telefonnummer.."
+            @onInput="onInputPhone"
+            size="large"
+          />
+        </div>
+        <div class="input-field-item">
+          <hDropdown
+            label="Stad"
+            :items="municipalityOptions"
+            @onChange="onChangeMunicipality"
+            size="large"
+          />
+        </div>
+        <div class="input-field-item">
+          <hTextArea
+            placeholder="Fyll i det som krävs för att utföra uppdraget."
+            @onInput="onInputFreeText"
+            size="large"
+          />
+        </div>
+        <div class="input-field-item">
+          <hInput
+            placeholder="Donation SEK (valfri)"
+            @onInput="onInputDonation"
+            size="large"
+          />
         </div>
         <div class="input-field-button">
-          <hButton text="Lägg till uppdrag" color="pink" />
+          <hButton text="Lägg till uppdrag" color="pink" size="large" />
         </div>
       </div>
     </div>
@@ -59,7 +73,7 @@ export default {
       ],
       municipalities,
       selectedCategory: null,
-      selectedCity: null,
+      selectedMunicipality: null,
       phoneNumber: null,
       freeText: null,
       donation: null
@@ -79,8 +93,8 @@ export default {
     onChangeCategory(event) {
       this.selectedCategory = this.categories.find(a => a.value === event);
     },
-    onChangeCity(event) {
-      this.selectedCity = event;
+    onChangeMunicipality(event) {
+      this.selectedMunicipality = event;
     },
     onInputPhone(value) {
       this.phoneNumber = value;
@@ -102,16 +116,16 @@ export default {
   padding-right: 50px;
   border: 2px solid #f3f3f4;
   border-radius: 8px;
-  width: 400px;
+  width: 275px;
   display: grid;
   grid-template-columns: 1fr;
 }
 .header-text {
-  text-align: left;
+  text-align: center;
 }
 .input-field-item {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  justify-content: left;
   padding-top: 20px;
 }
 .input-field-item-label {
