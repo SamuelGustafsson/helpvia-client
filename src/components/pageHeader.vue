@@ -1,7 +1,7 @@
 <template>
   <div class="header">
     <div class="account-cta">
-      <div class="logo-text">Helpvia</div>
+      <div @click="goToRoute('/')" class="logo-text">Helpvia</div>
       <div class="button-holder">
         <hButton
           text="Logga in"
@@ -35,7 +35,7 @@ export default {
   },
   methods: {
     goToRoute(route) {
-      router.history.current.name !== route && router.push(route);
+      router.history.current.path !== route && router.push(route);
     }
   }
 };
@@ -51,6 +51,7 @@ export default {
   align-items: center;
   font-family: Montserrat;
   font-size: 28px;
+  cursor: pointer;
 }
 .account-cta {
   display: grid;
