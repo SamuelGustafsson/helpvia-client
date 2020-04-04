@@ -45,12 +45,12 @@
 <script>
 import hDropdown from "../components/elements/hDropdown.vue";
 import hButton from "../components/elements/hButton.vue";
-import missionList from "../components/missionList.vue";
-import addMissionCard from "../components/addMissionCard.vue";
+import missionList from "./missionList.vue";
+import addMissionCard from "./addMissionCard.vue";
 import municipalities from "../lib/municipalities.json";
 import plusCircleSolid from "../assets/plus-circle-solid.svg";
 export default {
-  name: "missions",
+  name: "Missions",
   components: {
     hDropdown,
     hButton,
