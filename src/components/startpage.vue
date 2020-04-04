@@ -41,7 +41,7 @@ export default {
   methods: {
     ...mapActions(["setField"]),
     showMissions() {
-      this.setField({ group: "session", field: "showMissions", value: true });
+      this.$router.push("missions");
     }
   }
 };

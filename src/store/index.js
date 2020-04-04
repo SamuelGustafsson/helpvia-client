@@ -6,7 +6,6 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     user: null,
-    session: { showMissions: { value: null } }
   },
   actions: {
     setField(context, { value, group, field }) {

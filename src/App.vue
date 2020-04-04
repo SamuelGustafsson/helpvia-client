@@ -1,28 +1,20 @@
 <template>
   <div id="app">
     <pageHeader />
-    <startpage v-if="!showMissions" />
-    <missions v-else />
+     <router-view />
   </div>
 </template>
 
 <script>
-import startpage from "./components/startpage.vue";
 import pageHeader from "./components/pageHeader.vue";
-import missions from "./components/missions.vue";
+
 
 export default {
   name: "App",
   components: {
-    startpage,
     pageHeader,
-    missions
   },
-  computed: {
-    showMissions() {
-      return this.$store.state.session.showMissions.value || null;
-    }
-  },
+  computed: {},
   methods: {}
 };
 </script>

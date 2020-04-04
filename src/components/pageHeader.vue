@@ -7,31 +7,37 @@
           text="Logga in"
           color="white"
           size="small"
-          @onClick="toggleLogin = !toggleLogin"
+          @onClick="goToRoute('login')"
         />
         <hButton
           text="Registrera"
           color="pink"
           size="small"
-          @onClick="toggleLogin = !toggleLogin"
+          @onClick="goToRoute('register')"
         />
       </div>
     </div>
-    <div v-if="toggleLogin">
-      Logga in
-    </div>
   </div>
 </template>
+
 <script>
+import router from "../router";
+
 import hButton from "../components/elements/hButton";
+
 export default {
   name: "pageHeader",
   components: {
-    hButton
+    hButton,
   },
   data() {
     return { toggleLogin: false };
-  }
+  },
+  methods: {
+    goToRoute(route) {      
+      router.history.current.name !== route && router.push(route);
+    },
+  },
 };
 </script>
 <style lang="scss" scoped>
