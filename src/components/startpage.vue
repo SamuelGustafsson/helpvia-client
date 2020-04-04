@@ -48,10 +48,16 @@ export default {
 </script>
 <style lang="scss" scoped>
 .main-content-holder {
-  padding: 70px;
+  padding: 20px;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   border-bottom: 2px solid #f3f3f4;
+  @media screen and (min-width: 480px) {
+    padding: 70px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-bottom: 2px solid #f3f3f4;
+  }
 }
 
 .header-text {
@@ -71,7 +77,11 @@ export default {
 }
 
 .image-holder {
-  width: 300px;
+  display: none;
+  @media screen and (min-width: 480px) {
+    display: block;
+    width: 300px;
+  }
 }
 .menu-buttons {
   display: grid;

@@ -28,7 +28,7 @@ export default {
   },
   methods: {
     onInput(input) {
-      this.$emit("onChange", input);
+      this.$emit("onInput", input);
     }
   }
 };

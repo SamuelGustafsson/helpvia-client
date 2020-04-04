@@ -1,28 +1,41 @@
 <template>
-  <div class="mission-holder">
-    <div
-      v-for="(mission, index) in missionListParsed"
-      :key="index"
-      class="mission-card"
-    >
-      <div class="mission-card-item">
-        <span class="category-label">{{ mapCategory(mission.category) }} </span>
-        <span class="Municipality-label">
-          <div class="location-icon-image">
-            <img :src="locationIcon" width="15px" />
-          </div>
+  <div>
+    <div v-if="!takenMission" class="mission-holder">
+      <div
+        v-for="(mission, index) in missionListNotTakenMissions"
+        :key="index"
+        class="mission-card"
+      >
+        <div class="mission-card-item">
+          <span class="category-label"
+            >{{ mapCategory(mission.category) }}
+          </span>
+          <span class="Municipality-label">
+            <div class="location-icon-image">
+              <img :src="locationIcon" width="15px" />
+            </div>
 
-          {{ mission.municipality }}
-        </span>
-      </div>
-      <div>
-        {{ mission.freeText }}
-      </div>
+            {{ mission.municipality }}
+          </span>
+        </div>
+        <div>
+          {{ mission.freeText }}
+        </div>
 
-      <div><span class="label">Donation </span>{{ mission.donation }}</div>
-      <div class="mission-card-item">
-        <hButton text="Ta uppdrag" color="dusk" size="small"> </hButton>
+        <div><span class="label">Donation </span>{{ mission.donation }}</div>
+        <div class="mission-card-item">
+          <hButton
+            text="Ta uppdrag"
+            color="dusk"
+            size="small"
+            @onClick="takeMission(mission)"
+          >
+          </hButton>
+        </div>
       </div>
+    </div>
+    <div v-else>
+      <confirmTakeMission :takenMission="takenMission" />
     </div>
   </div>
 </template>
@@ -30,10 +43,12 @@
 import missionList from "./../lib/missionList.json";
 import hButton from "../components/elements/hButton";
 import locationIcon from "../assets/locationIcon.svg";
+import confirmTakeMission from "../components/confirmTakeMission.vue";
 export default {
   name: "missionList",
   components: {
-    hButton
+    hButton,
+    confirmTakeMission
   },
   props: {
     filterCategory: {
@@ -49,6 +64,7 @@ export default {
     return {
       locationIcon,
       missionList,
+      takenMission: null,
       categories: [
         { id: "GROCERIES", value: "Köp av matvaror" },
         { id: "MAIL", value: "Hämta post" },
@@ -71,15 +87,20 @@ export default {
           )
         : this.missionList;
     },
-    missionListParsed() {
-      return this.missionListParsedByCategory.filter(
-        value => -1 !== this.missionListParsedByMunicipality.indexOf(value)
-      );
+    missionListNotTakenMissions() {
+      return this.missionListParsedByCategory
+        .filter(
+          value => -1 !== this.missionListParsedByMunicipality.indexOf(value)
+        )
+        .filter(a => a.status === "MISSION_CREATED");
     }
   },
   methods: {
     mapCategory(category) {
       return this.categories.find(a => a.id === category).value;
+    },
+    takeMission(mission) {
+      this.takenMission = mission;
     }
   }
 };

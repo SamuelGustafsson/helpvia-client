@@ -2,18 +2,21 @@
   <div class="page-holder">
     <div class="button-holder">
       <div class="add-mission-holder">
-        <hButton
-          text="Lägg till uppdrag"
-          color="pink"
-          @onClick="expandAddMission = !expandAddMission"
-        />
+        <div class="mobile-add-button">
+          <img :src="plusCircleSolid" width="40px;" />
+        </div>
+        <div class="desktop-add-button">
+          <hButton
+            text="Lägg till uppdrag"
+            color="pink"
+            @onClick="expandAddMission = !expandAddMission"
+          />
+        </div>
       </div>
 
       <div class="filter-items">
         <div class="filter-item">
-          <span class="filter-text">
-            Kategori:
-          </span>
+          <span class="filter-text"> Filtrera: </span>
           <hDropdown
             label="Kategori"
             :items="categories"
@@ -21,9 +24,7 @@
           />
         </div>
         <div class="filter-item">
-          <span class="filter-text">
-            Stad:
-          </span>
+          <span class="filter-text"> Filtrera: </span>
           <hDropdown
             label="Stad"
             :items="municipalityOptions"
@@ -47,6 +48,7 @@ import hButton from "../components/elements/hButton.vue";
 import missionList from "../components/missionList.vue";
 import addMissionCard from "../components/addMissionCard.vue";
 import municipalities from "../lib/municipalities.json";
+import plusCircleSolid from "../assets/plus-circle-solid.svg";
 export default {
   name: "missions",
   components: {
@@ -66,7 +68,8 @@ export default {
       selectedCategory: null,
       selectedMunicipality: null,
       expandAddMission: false,
-      municipalities
+      municipalities,
+      plusCircleSolid
     };
   },
   computed: {
@@ -93,16 +96,31 @@ export default {
 </script>
 <style lang="scss" scoped>
 .page-holder {
-  padding: 40px;
+  padding-top: 10px;
+  @media screen and (min-width: 480px) {
+    padding: 40px;
+  }
 }
 .button-holder {
+  padding-top: 40px;
   display: grid;
-  grid-template-columns: max-content 1fr;
-  grid-gap: 40px;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 10px;
+  @media screen and (min-width: 480px) {
+    grid-template-columns: max-content 1fr;
+    grid-gap: 40px;
+  }
 }
 .add-mission-holder {
   display: grid;
-  justify-content: start;
+  justify-content: end;
+  order: 2;
+  align-items: end;
+  @media screen and (min-width: 480px) {
+    border-bottom: none;
+    justify-content: start;
+    order: 1;
+  }
 }
 .filter-holder {
   display: grid;
@@ -112,17 +130,42 @@ export default {
 .filter-text {
   display: grid;
   align-items: center;
+  display: none;
+  @media screen and (min-width: 480px) {
+  }
 }
 .filter-items {
   display: grid;
-  grid-template-columns: max-content max-content;
+  grid-template-columns: 1fr;
   grid-gap: 20px;
   justify-content: end;
+  order: 1;
+  @media screen and (min-width: 480px) {
+    grid-template-columns: max-content max-content;
+    order: 2;
+  }
 }
 .filter-item {
   display: grid;
-  grid-template-columns: max-content max-content;
+
+  grid-template-columns: max-content 1fr;
   grid-gap: 10px;
   text-align: left;
+  @media screen and (min-width: 480px) {
+    grid-gap: 10px;
+    grid-template-columns: max-content max-content;
+  }
+}
+.mobile-add-button {
+  display: block;
+  @media screen and (min-width: 750px) {
+    display: none;
+  }
+}
+.desktop-add-button {
+  display: none;
+  @media screen and (min-width: 750px) {
+    display: block;
+  }
 }
 </style>

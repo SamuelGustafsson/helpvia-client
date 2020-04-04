@@ -43,7 +43,12 @@
           />
         </div>
         <div class="input-field-button">
-          <hButton text="Lägg till uppdrag" color="pink" size="large" />
+          <hButton
+            text="Lägg till uppdrag"
+            color="pink"
+            size="large"
+            @onClick="addMission"
+          />
         </div>
       </div>
     </div>
@@ -55,6 +60,8 @@ import hButton from "../components/elements/hButton.vue";
 import hInput from "../components/elements/hInput.vue";
 import hTextArea from "../components/elements/hTextArea.vue";
 import municipalities from "../lib/municipalities.json";
+import missionList from "../lib/missionList.json";
+
 export default {
   name: "addMissionCard",
   components: {
@@ -76,7 +83,8 @@ export default {
       selectedMunicipality: null,
       phoneNumber: null,
       freeText: null,
-      donation: null
+      donation: null,
+      missionList
     };
   },
   computed: {
@@ -94,9 +102,12 @@ export default {
       this.selectedCategory = this.categories.find(a => a.value === event);
     },
     onChangeMunicipality(event) {
-      this.selectedMunicipality = event;
+      this.selectedMunicipality = this.municipalityOptions.find(
+        a => a.value === event
+      );
     },
     onInputPhone(value) {
+      console.log("phone", value);
       this.phoneNumber = value;
     },
     onInputFreeText(value) {
@@ -104,6 +115,17 @@ export default {
     },
     onInputDonation(value) {
       this.donation = value;
+    },
+    addMission() {
+      console.log("selectedMunicipality");
+      /* const missionObject = {
+        category: this.selectedCategory.id,
+        phone: this.phoneNumber,
+        municipality: this.selectedMunicipality.value,
+        donation: this.donation,
+        freeText: this.freeText,
+        status: "CREATED_MISSION"
+      };*/
     }
   }
 };
