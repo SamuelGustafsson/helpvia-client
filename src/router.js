@@ -4,6 +4,7 @@ import Router from "vue-router";
 import startpage from "./components/startpage.vue";
 import missions from "./components/missions.vue";
 
+import loginRoutes from "./login/routes"
 Vue.use(Router);
 
 export default  new Router({
@@ -19,6 +20,7 @@ export default  new Router({
             name: "missions", 
             component: missions 
         },
+        ...loginRoutes,
     ]
 })
 
