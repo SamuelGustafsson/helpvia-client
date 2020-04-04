@@ -1,30 +1,19 @@
 import Vue from "vue";
 import Router from "vue-router";
 
-import startpage from "./components/startpage.vue";
-import missions from "./components/missions.vue";
-
-import loginRoutes from "./login/routes"
-import RegisterRoutes from "./register/routes"
+import homeRoutes from "./home/routes";
+import loginRoutes from "./login/routes";
+import registerRoutes from "./register/routes";
+import missionsRoutes from "./missions/routes";
 
 Vue.use(Router);
 
 export default new Router({
-    mode:"history",
+    mode: "history",
     routes: [
-        { 
-            path: "/", 
-            name: "home", 
-            component: startpage 
-        },
-        { 
-            path: "/missions", 
-            name: "missions", 
-            component: missions 
-        },
+        ...homeRoutes,
         ...loginRoutes,
-        ...RegisterRoutes
-    ]
-})
-
-  
+        ...registerRoutes,
+        ...missionsRoutes
+    ],
+});
