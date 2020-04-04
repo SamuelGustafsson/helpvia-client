@@ -66,7 +66,6 @@ import hButton from "../components/elements/hButton.vue";
 import hInput from "../components/elements/hInput.vue";
 import hTextArea from "../components/elements/hTextArea.vue";
 import municipalities from "../lib/municipalities.json";
-import missionList from "../lib/missionList.json";
 import axios from "axios";
 import { mapActions } from "vuex";
 
@@ -92,7 +91,6 @@ export default {
       phoneNumber: null,
       freeText: null,
       donation: null,
-      missionList,
       succesfulPost: null
     };
   },
