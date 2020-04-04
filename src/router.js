@@ -5,9 +5,11 @@ import startpage from "./components/startpage.vue";
 import missions from "./components/missions.vue";
 
 import loginRoutes from "./login/routes"
+import RegisterRoutes from "./register/routes"
+
 Vue.use(Router);
 
-export default  new Router({
+export default new Router({
     mode:"history",
     routes: [
         { 
@@ -21,6 +23,7 @@ export default  new Router({
             component: missions 
         },
         ...loginRoutes,
+        ...RegisterRoutes
     ]
 })
 
