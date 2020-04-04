@@ -34,7 +34,7 @@
 import hButton from "../components/elements/hButton";
 import { mapActions } from "vuex";
 export default {
-  name: "startpage",
+  name: "home",
   components: {
     hButton
   },
