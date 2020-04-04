@@ -65,8 +65,11 @@ export default {
   background-color: #434971;
   color: white;
 }
-.small {
+.xsmall {
   width: 100px;
+}
+.small {
+  width: 150px;
 }
 .medium {
   width: 200px;
