@@ -141,10 +141,10 @@ export default {
 <style lang="scss" scoped>
 .confirm-mission-holder {
   display: grid;
-
+  padding: 20px;
   @media screen and (min-width: 570px) {
     margin: 50px;
-    padding: 20px;
+
     border: 1px solid lightgray;
   }
 }
