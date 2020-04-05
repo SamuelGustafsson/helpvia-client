@@ -38,6 +38,7 @@
                 placeholder="Bekräfta lösenord.."
                 size="large"
                 type="password"
+                @onInput="handlePhonePasswordConfirmationInputOnChange"
               />
             </div>
           </div>
@@ -81,6 +82,9 @@ export default {
     },
     handlePhonePasswordInputOnChange(event) {
       this.password = event;
+    },
+    handlePhonePasswordConfirmationInputOnChange(event) {
+      this.passwordConfirmation = event;
     },
   },
 };
