@@ -9,18 +9,32 @@
             </div>
             <div class="input-field">
               <b> Email </b>
-              <hInput placeholder="Email.." size="large" />
+              <hInput
+                placeholder="Email.."
+                size="large"
+                @onInput="handleEmailInputOnChange"
+              />
             </div>
             <div class="input-field">
               <b> Lösenord </b>
-              <hInput placeholder="Lösenord.." size="large" type="password" />
+              <hInput
+                placeholder="Lösenord.."
+                size="large"
+                type="password"
+                @onInput="handlePasswordInputOnChange"
+              />
               <div class="align-right">
                 Glömt lösenord?
               </div>
             </div>
           </div>
           <div class="login-button-holder">
-            <hButton text="Logga in" size="large" color="dusk" />
+            <hButton
+              text="Logga in"
+              size="large"
+              color="dusk"
+              @onClick="login"
+            />
           </div>
         </div>
         <div class="register-section">
@@ -34,14 +48,64 @@
 </template>
 
 <script>
+import axios from "axios";
+import { mapActions } from "vuex";
+
 import hInput from "../components/elements/hInput";
 import hButton from "../components/elements/hButton";
+
 export default {
   name: "Login",
   components: {
     hInput,
-    hButton
-  }
+    hButton,
+  },
+  data: function() {
+    return {
+      email: "",
+      password: "",
+      error: null,
+    };
+  },
+  methods: {
+    ...mapActions(["setField"]),
+    async login() {
+      console.log("ONCLICK LOGIN");
+
+      const users = await axios
+        .get("http://localhost:3000/users")
+        .then((response) => response.data)
+        .catch((error) => console.log("Fail to fetch users"));
+
+      const isAuthenticated = users.some((user) => {
+        console.log("USER", user);
+
+        return user.email === this.email && user.password === this.password
+          ? true
+          : false;
+      });
+
+      if (!isAuthenticated) {
+        this.error =
+          "Det gick inte att logga in, vänligen kontrollera din email och lösenord";
+      }
+      const user = users.find((user) => user.email);
+
+      const authenticatedUser = {
+        isAuthenticated,
+        userId: user.id,
+        email: user.email,
+      };      
+
+      this.setField({ field: "user", value: authenticatedUser });
+    },
+    handleEmailInputOnChange(event) {
+      this.email = event;
+    },
+    handlePasswordInputOnChange(event) {
+      this.password = event;
+    },
+  },
 };
 </script>
 
