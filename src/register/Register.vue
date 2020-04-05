@@ -18,7 +18,7 @@
             <div class="input-field">
               <b> Telefonnummer </b>
               <hInput
-                placeholder="Email.."
+                placeholder="Telefonnummer.."
                 size="large"
                 @onInput="handlePhoneNumberInputOnChange"
               />
@@ -26,7 +26,7 @@
             <div class="input-field">
               <b> Lösenord </b>
               <hInput
-                placeholder="Telefonnummer.."
+                placeholder="Lösenord.."
                 size="large"
                 type="password"
                 @onInput="handlePhonePasswordInputOnChange"
