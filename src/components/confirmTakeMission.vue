@@ -10,7 +10,7 @@
           <span class="category-label"
             >{{ mapCategory(takenMission.category) }}
           </span>
-          <span class="Municipality-label">
+          <span class="municipality-label">
             <div class="location-icon-image">
               <img :src="locationIcon" width="15px" />
             </div>
@@ -50,7 +50,7 @@
           <span class="category-label"
             >{{ mapCategory(takenMission.category) }}
           </span>
-          <span class="Municipality-label">
+          <span class="municipality-label">
             <div class="location-icon-image">
               <img :src="locationIcon" width="15px" />
             </div>
@@ -141,9 +141,12 @@ export default {
 <style lang="scss" scoped>
 .confirm-mission-holder {
   display: grid;
-  margin: 50px;
-  padding: 20px;
-  border: 1px solid lightgray;
+
+  @media screen and (min-width: 570px) {
+    margin: 50px;
+    padding: 20px;
+    border: 1px solid lightgray;
+  }
 }
 .mission-card {
   display: grid;
@@ -154,20 +157,29 @@ export default {
 }
 .mission-card-item {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  justify-content: left;
+  grid-gap: 5px;
+  @media screen and (min-width: 570px) {
+    grid-template-columns: 1fr 1fr;
+    justify-content: initial;
+    grid-gap: 0px;
+  }
 }
 .category-label {
   font-family: Montserrat;
   font-weight: 600;
 }
-.Municipality-label {
+.municipality-label {
   display: grid;
-  align-items: center;
-  grid-template-columns: 1fr max-content;
+  align-items: left;
+  grid-template-columns: max-content max-content;
   grid-gap: 10px;
   font-family: Montserrat;
   font-weight: 600;
   text-align: right;
+  @media screen and (min-width: 570px) {
+    grid-template-columns: 1fr max-content;
+  }
 }
 .location-icon-image {
   align-items: right;
@@ -175,9 +187,12 @@ export default {
 .button-holder {
   padding-top: 20px;
   display: grid;
-  grid-template-columns: max-content max-content;
+  grid-template-columns: 1fr;
   grid-gap: 20px;
   justify-content: center;
+  @media screen and (min-width: 570px) {
+    grid-template-columns: max-content max-content;
+  }
 }
 .phone-number {
   font-family: Montserrat;

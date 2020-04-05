@@ -54,8 +54,8 @@
     </div>
     <div v-else-if="succesfulPost" class="succesful-post">
       <h2>Klart!</h2>
-      Ärendet är upplagt<br />
-      När någon väljer ditt ärende kontaktar hen dig för mer information <br />
+      Ärendet är upplagt.<br />
+      När någon väljer ditt ärende kontaktar hen dig för mer information. <br />
       Tack för att du stannar hemma i coronakrisen!
     </div>
   </div>
@@ -210,7 +210,11 @@ export default {
   align-items: center;
 }
 .succesful-post {
-  padding: 40px;
-  margin: 50px;
+  padding: 10px;
+  margin: 10px;
+  @media screen and (min-width: 480px) {
+    padding: 40px;
+    margin: 50px;
+  }
 }
 </style>
