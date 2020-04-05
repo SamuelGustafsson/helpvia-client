@@ -43,7 +43,12 @@
             </div>
           </div>
           <div class="login-button-holder">
-            <hButton text="Registrera" size="large" color="dusk" />
+            <hButton
+              text="Registrera"
+              size="large"
+              color="dusk"
+              @onClick="registerAccount"
+            />
           </div>
         </div>
         <div class="register-section">
@@ -57,6 +62,7 @@
 </template>
 
 <script>
+import axios from "axios";
 import hInput from "../components/elements/hInput";
 import hButton from "../components/elements/hButton";
 export default {
@@ -85,6 +91,48 @@ export default {
     },
     handlePhonePasswordConfirmationInputOnChange(event) {
       this.passwordConfirmation = event;
+    },
+    validatePassword() {
+      return (
+        this.password !== "" && this.password === this.passwordConfirmation
+      );
+    },
+    validatePhonenumber() {
+      return this.phoneNumber !== "";
+    },
+    async checkIfEmailExist() {
+      const users = await axios
+        .get("http://localhost:3000/users")
+        .then((response) => response.data)
+        .catch((error) => console.log("Fail to fetch users"));
+
+      const isEmailOccupied = users.some((user) =>
+        user.email === this.email ? true : false
+      );
+
+      return isEmailOccupied;
+    },
+    async registerAccount() {
+      const emailIsOccupied = await this.checkIfEmailExist();
+      const passwordIsValid = await this.validatePassword();
+      const isPhonenumberValid = this.validatePhonenumber();
+
+      console.log({ emailIsOccupied, passwordIsValid, isPhonenumberValid });
+
+      if (emailIsOccupied || !isPhonenumberValid || !passwordIsValid) return;
+
+      const newUser = {
+        email: this.email,
+        password: this.password,
+        phoneNumber: this.phoneNumber,
+      };
+
+      await axios
+        .post("http://localhost:3000/users", newUser)
+        .then((response) => console.log("REGISTER FULLFILLED", response))
+        .catch((error) => console.log("Failed to register new account", error));
+
+      this.$router.push("/");
     },
   },
 };
