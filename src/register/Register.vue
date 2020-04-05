@@ -13,7 +13,7 @@
             </div>
             <div class="input-field">
               <b> Telefonnummer </b>
-              <hInput placeholder="Email.." size="large" />
+              <hInput placeholder="Email.." size="large" @onInput="handlePhoneNumberInputOnChange"/>
             </div>
             <div class="input-field">
               <b> Lösenord </b>
@@ -58,7 +58,7 @@ export default {
   data: function() {
     return {
       email: "",
-      phonenumber: "",
+      phoneNumber: "",
       password: "",
       passwordConfirmation: "",
     };
@@ -66,6 +66,9 @@ export default {
   methods: {
     handleEmailInputOnChange(event) {
       this.email = event;
+    },
+    handlePhoneNumberInputOnChange(event) {
+      this.phoneNumber = event;
     },
   },
 };
