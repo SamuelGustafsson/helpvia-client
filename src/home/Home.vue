@@ -6,9 +6,9 @@
           Vi finns till för att hjälpa er att hjälpa varandra genom krisen
         </div>
         <div class="sub-text">
-          Tail beef shankle biltong, kevin chislic shank pork meatball. Salami
-          capicola pork kevin buffalo drumstick turkey pork loin filet mignon
-          sausage short ribs.
+          Personer i riskgrupp kan nu få hjälp med vardagliga sysslor så de kan
+          hålla sig hemma och i säkerhet från Covid-19. <br />
+          Tillsammans kan vi rädda liv.
         </div>
 
         <div class="menu-buttons">
