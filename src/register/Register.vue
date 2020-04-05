@@ -9,11 +9,19 @@
             </div>
             <div class="input-field">
               <b> Email </b>
-              <hInput placeholder="Email.." size="large" @onInput="handleEmailInputOnChange" />
+              <hInput
+                placeholder="Email.."
+                size="large"
+                @onInput="handleEmailInputOnChange"
+              />
             </div>
             <div class="input-field">
               <b> Telefonnummer </b>
-              <hInput placeholder="Email.." size="large" @onInput="handlePhoneNumberInputOnChange"/>
+              <hInput
+                placeholder="Email.."
+                size="large"
+                @onInput="handlePhoneNumberInputOnChange"
+              />
             </div>
             <div class="input-field">
               <b> Lösenord </b>
