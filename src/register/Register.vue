@@ -23,6 +23,14 @@
                 type="password"
               />
             </div>
+            <div class="input-field">
+              <b> Bekräfta lösenord </b>
+              <hInput
+                placeholder="Bekräfta lösenord.."
+                size="large"
+                type="password"
+              />
+            </div>
           </div>
           <div class="login-button-holder">
             <hButton text="Registrera" size="large" color="dusk" />
