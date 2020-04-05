@@ -28,7 +28,7 @@
         color="pink"
         @onClick="confirmMission(takenMission)"
       />
-      <hButton text="Avbryt" color="white" />
+      <hButton text="Avbryt" color="white" @onClick="abortTakeMission" />
     </div>
   </div>
 </template>
@@ -85,6 +85,9 @@ export default {
         .catch(error => {
           console.log("error occured", error);
         });
+    },
+    abortTakeMission() {
+      this.$router.go(-1);
     }
   }
 };

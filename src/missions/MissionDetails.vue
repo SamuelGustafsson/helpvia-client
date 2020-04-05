@@ -1,15 +1,26 @@
 <template>
-  <div>MISSION</div>
+  <confirmTakeMission :takenMission="takenMission" />
 </template>
 
 <script>
+import confirmTakeMission from "../components/confirmTakeMission";
 export default {
   name: "mission",
-  data: function() {
+  components: {
+    confirmTakeMission
+  },
+  data() {
     return {
-      missionId: this.$router.history.current.params.id,
+      missionId: this.$router.history.current.params.id
     };
   },
+  computed: {
+    takenMission() {
+      return (
+        this.$store.state.missions.find(a => a.id === this.missionId) || {}
+      );
+    }
+  }
 };
 </script>
 
