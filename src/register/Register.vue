@@ -9,7 +9,7 @@
             </div>
             <div class="input-field">
               <b> Email </b>
-              <hInput placeholder="Email.." size="large" />
+              <hInput placeholder="Email.." size="large" @onInput="handleEmailInputOnChange" />
             </div>
             <div class="input-field">
               <b> Telefonnummer </b>
@@ -53,8 +53,21 @@ export default {
   name: "Login",
   components: {
     hInput,
-    hButton
-  }
+    hButton,
+  },
+  data: function() {
+    return {
+      email: "",
+      phonenumber: "",
+      password: "",
+      passwordConfirmation: "",
+    };
+  },
+  methods: {
+    handleEmailInputOnChange(event) {
+      this.email = event;
+    },
+  },
 };
 </script>
 
