@@ -124,8 +124,8 @@ export default {
     onInputDonation(value) {
       this.donation = value;
     },
-    saveMission(mission) {
-      axios
+    async saveMission(mission) {
+      await axios
         .post("http://localhost:3000/missions", {
           ...mission
         })
@@ -148,10 +148,15 @@ export default {
       this.saveMission(missionObject);
       this.updateMissions();
     },
-    updateMissions() {
-      axios.get("http://localhost:3000/missions").then(response => {
-        this.setField({ field: "missions", value: response.data });
-      });
+    async updateMissions() {
+      await axios
+        .get("http://localhost:3000/missions")
+        .then(response => {
+          this.setField({ field: "missions", value: response.data });
+        })
+        .catch(error => {
+          console.log("error occured addMissionCard", error);
+        });
     }
   }
 };

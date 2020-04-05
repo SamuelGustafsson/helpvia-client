@@ -3,6 +3,7 @@
     <input
       :class="[size, 'input-field']"
       :placeholder="placeholder"
+      :type="type"
       @input="onInput($event.target.value)"
     />
   </div>
@@ -24,6 +25,10 @@ export default {
     size: {
       type: String,
       default: "medium"
+    },
+    type: {
+      type: String,
+      default: "text"
     }
   },
   methods: {
