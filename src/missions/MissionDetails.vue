@@ -4,10 +4,13 @@
 
 <script>
 export default {
-name: "mission"
-}
+  name: "mission",
+  data: function() {
+    return {
+      missionId: this.$router.history.current.params.id,
+    };
+  },
+};
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>
