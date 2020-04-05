@@ -2,7 +2,10 @@
   <div class="page-holder">
     <div class="button-holder">
       <div class="add-mission-holder">
-        <div class="mobile-add-button">
+        <div
+          class="mobile-add-button"
+          @click="expandAddMission = !expandAddMission"
+        >
           <img :src="plusCircleSolid" width="40px;" />
         </div>
         <div class="desktop-add-button">

@@ -1,34 +1,71 @@
 <template>
-  <div class="confirm-mission-holder ">
-    <h3>
-      Du har valt att ta uppdraget
-    </h3>
-    <div class="mission-card">
-      <div class="mission-card-item">
-        <span class="category-label"
-          >{{ mapCategory(takenMission.category) }}
-        </span>
-        <span class="Municipality-label">
-          <div class="location-icon-image">
-            <img :src="locationIcon" width="15px" />
-          </div>
+  <div>
+    <div v-if="!missionConfirmed" class="confirm-mission-holder ">
+      <h3>
+        Du har valt att ta uppdraget
+      </h3>
 
-          {{ takenMission.municipality }}
-        </span>
-      </div>
-      <div>
-        {{ takenMission.freeText }}
-      </div>
+      <div class="mission-card">
+        <div class="mission-card-item">
+          <span class="category-label"
+            >{{ mapCategory(takenMission.category) }}
+          </span>
+          <span class="Municipality-label">
+            <div class="location-icon-image">
+              <img :src="locationIcon" width="15px" />
+            </div>
 
-      <div><span class="label">Donation </span>{{ takenMission.donation }}</div>
+            {{ takenMission.municipality }}
+          </span>
+        </div>
+        <div>
+          {{ takenMission.freeText }}
+        </div>
+
+        <div>
+          <span class="label">Donation </span>{{ takenMission.donation }}
+        </div>
+      </div>
+      <div class="button-holder">
+        <hButton
+          text="Bekräfta"
+          color="pink"
+          @onClick="confirmMission(takenMission)"
+        />
+        <hButton text="Avbryt" color="white" @onClick="abortTakeMission" />
+      </div>
     </div>
-    <div class="button-holder">
-      <hButton
-        text="Bekräfta"
-        color="pink"
-        @onClick="confirmMission(takenMission)"
-      />
-      <hButton text="Avbryt" color="white" @onClick="abortTakeMission" />
+    <div v-else class="confirm-mission-holder ">
+      <h3 style="text-align:left;">
+        Tack för att du bidrar i coronakrisen!
+      </h3>
+      <p class="information-text">
+        Kontakta uppdragsgivaren för mer information som t.ex. bostadsadress och
+        betalning. <br />
+        Telefonnummer:
+        <a :href="phoneNumberLink" class="phone-number">{{ phoneNumber }}</a>
+      </p>
+      <div class="mission-card">
+        <div class="mission-card-item">
+          <span class="category-label"
+            >{{ mapCategory(takenMission.category) }}
+          </span>
+          <span class="Municipality-label">
+            <div class="location-icon-image">
+              <img :src="locationIcon" width="15px" />
+            </div>
+
+            {{ takenMission.municipality }}
+          </span>
+        </div>
+        <div>
+          {{ takenMission.freeText }}
+        </div>
+
+        <div>
+          <span class="label">Donation </span>{{ takenMission.donation }}
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -56,8 +93,17 @@ export default {
         { id: "MAIL", value: "Hämta post" },
         { id: "CUTTHELAWN", value: "Klippa gräsmatta" },
         { id: "OTHER", value: "Annat" }
-      ]
+      ],
+      missionConfirmed: false
     };
+  },
+  computed: {
+    phoneNumber() {
+      return this.takenMission.phone;
+    },
+    phoneNumberLink() {
+      return "tel:046" + this.phoneNumber.toString().slice(0, 1);
+    }
   },
   methods: {
     ...mapActions(["setField"]),
@@ -75,7 +121,7 @@ export default {
     confirmMission(takenMission) {
       const newMission = this.updateMission(takenMission);
       this.updateMissions(newMission);
-      console.log("Added mission");
+      this.missionConfirmed = true;
     },
     async updateMissions(newMission) {
       await axios
@@ -132,5 +178,13 @@ export default {
   grid-template-columns: max-content max-content;
   grid-gap: 20px;
   justify-content: center;
+}
+.phone-number {
+  font-family: Montserrat;
+  color: #d95988;
+  text-decoration: none;
+}
+.information-text {
+  text-align: left;
 }
 </style>
