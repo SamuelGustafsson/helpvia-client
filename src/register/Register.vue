@@ -74,7 +74,7 @@ export default {
   data: function() {
     return {
       email: "",
-      phoneNumber: "",
+      phonenumber: "",
       password: "",
       passwordConfirmation: "",
     };
@@ -84,7 +84,7 @@ export default {
       this.email = event;
     },
     handlePhoneNumberInputOnChange(event) {
-      this.phoneNumber = event;
+      this.phonenumber = event;
     },
     handlePhonePasswordInputOnChange(event) {
       this.password = event;
@@ -98,7 +98,7 @@ export default {
       );
     },
     validatePhonenumber() {
-      return this.phoneNumber !== "";
+      return this.phonenumber !== "";
     },
     async checkIfEmailExist() {
       const users = await axios
@@ -124,7 +124,7 @@ export default {
       const newUser = {
         email: this.email,
         password: this.password,
-        phoneNumber: this.phoneNumber,
+        phonenumber: this.phonenumber,
       };
 
       await axios
