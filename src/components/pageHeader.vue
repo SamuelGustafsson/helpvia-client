@@ -2,7 +2,7 @@
   <div class="header">
     <div class="account-cta">
       <div @click="goToRoute('/')" class="logo-text">Helpvia</div>
-      <div class="button-holder">
+      <div v-if="!isLoggedIn" class="button-holder">
         <hButton
           text="Logga in"
           color="white"
@@ -14,6 +14,20 @@
           color="pink"
           size="xsmall"
           @onClick="goToRoute('register')"
+        />
+      </div>
+      <div v-else class="button-holder">
+        <hButton
+          text="Mitt konto"
+          color="pink"
+          size="xsmall"
+          @onClick="goToRoute('myAccount')"
+        />
+        <hButton
+          text="Logga ut"
+          color="white"
+          size="xsmall"
+          @onClick="logout()"
         />
       </div>
     </div>
@@ -33,9 +47,23 @@ export default {
   data() {
     return { toggleLogin: false };
   },
+  computed: {
+    isLoggedIn() {
+      console.log("user", this.$store.state.user);
+      return (
+        (this.$store.state.user &&
+          this.$store.state.user.isAuthenticated === true) ||
+        false
+      );
+    }
+  },
   methods: {
     goToRoute(route) {
       router.history.current.path !== route && router.push(route);
+    },
+    logout() {
+      window.location.href = window.location.href;
+      router.push("/");
     }
   }
 };
