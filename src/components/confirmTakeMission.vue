@@ -26,7 +26,7 @@
       <hButton
         text="Bekräfta"
         color="pink"
-        @onClick="confirmMission(takenMission.id)"
+        @onClick="confirmMission(takenMission)"
       />
       <hButton text="Avbryt" color="white" />
     </div>
@@ -35,6 +35,9 @@
 <script>
 import hButton from "../components/elements/hButton";
 import locationIcon from "../assets/locationIcon.svg";
+import axios from "axios";
+import { mapActions } from "vuex";
+
 export default {
   name: "missionList",
   components: {
@@ -57,11 +60,31 @@ export default {
     };
   },
   methods: {
+    ...mapActions(["setField"]),
     mapCategory(category) {
       return this.categories.find(a => a.id === category).value;
     },
-    confirmMission(id) {
-      console.log("id", id);
+    updateMission(takenMission) {
+      const updatedMission = {
+        ...takenMission,
+        status: "MISSION_AWAITING_CONFIRMATION",
+        userId: "UserId123"
+      };
+      return updatedMission;
+    },
+    confirmMission(takenMission) {
+      const newMission = this.updateMission(takenMission);
+      this.updateMissions(newMission);
+      console.log("Added mission");
+    },
+    async updateMissions(newMission) {
+      await axios
+        .put("http://localhost:3000/missions/" + newMission.id, {
+          ...newMission
+        })
+        .catch(error => {
+          console.log("error occured", error);
+        });
     }
   }
 };

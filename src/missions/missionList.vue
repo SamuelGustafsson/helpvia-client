@@ -74,7 +74,7 @@ export default {
       ]
     };
   },
-  created() {
+  mounted() {
     this.updateMissions();
     console.log("this.missionList", this.missionList);
   },
@@ -108,12 +108,17 @@ export default {
     takeMission(mission) {
       this.takenMission = mission;
     },
-    updateMissions() {
-      axios.get("http://localhost:3000/missions").then(response => {
-        console.log("response", response.data);
-        this.missionList = response.data;
-        this.setField({ field: "missions", value: response.data });
-      });
+    async updateMissions() {
+      await axios
+        .get("http://localhost:3000/missions")
+        .then(response => {
+          console.log("response", response.data);
+          this.missionList = response.data;
+          this.setField({ field: "missions", value: response.data });
+        })
+        .catch(error => {
+          console.log("error missionList", error);
+        });
     }
   }
 };
