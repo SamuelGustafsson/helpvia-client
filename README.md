@@ -16,7 +16,6 @@ clone helpvia api https://github.com/SamuelGustafsson/helpvia-api/tree/develop
 ## Project setup
 ```
 npm install
-npm run serve
 ```
 
 ### Compiles and runs API
