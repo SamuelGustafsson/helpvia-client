@@ -99,7 +99,6 @@ export default {
   methods: {
     ...mapActions(["setField"]),
     mapCategory(category) {
-      console.log("categoru", category);
       return this.categories.find(a => a.id === category).value;
     },
     takeMission(mission) {
