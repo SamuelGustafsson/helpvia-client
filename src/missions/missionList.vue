@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="!takenMission" class="mission-holder">
+    <div class="mission-holder">
       <div
         v-for="(mission, index) in missionListNotTakenMissions"
         :key="index"
@@ -33,9 +33,6 @@
           </hButton>
         </div>
       </div>
-    </div>
-    <div v-else>
-      <confirmTakeMission :takenMission="takenMission" />
     </div>
   </div>
 </template>
@@ -106,13 +103,12 @@ export default {
       return this.categories.find(a => a.id === category).value;
     },
     takeMission(mission) {
-      this.takenMission = mission;
+      this.$router.push("missions/" + mission.id);
     },
     async updateMissions() {
       await axios
         .get("http://localhost:3000/missions")
         .then(response => {
-          console.log("response", response.data);
           this.missionList = response.data;
           this.setField({ field: "missions", value: response.data });
         })

@@ -2,7 +2,10 @@
   <div class="page-holder">
     <div class="button-holder">
       <div class="add-mission-holder">
-        <div class="mobile-add-button">
+        <div
+          class="mobile-add-button"
+          @click="expandAddMission = !expandAddMission"
+        >
           <img :src="plusCircleSolid" width="40px;" />
         </div>
         <div class="desktop-add-button">
@@ -117,7 +120,7 @@ export default {
   justify-content: end;
   order: 2;
   align-items: end;
-  @media screen and (min-width: 480px) {
+  @media screen and (min-width: 600px) {
     border-bottom: none;
     justify-content: start;
     order: 1;
@@ -132,8 +135,6 @@ export default {
   display: grid;
   align-items: center;
   display: none;
-  @media screen and (min-width: 480px) {
-  }
 }
 .filter-items {
   display: grid;
@@ -141,7 +142,7 @@ export default {
   grid-gap: 20px;
   justify-content: end;
   order: 1;
-  @media screen and (min-width: 480px) {
+  @media screen and (min-width: 600px) {
     grid-template-columns: max-content max-content;
     order: 2;
   }

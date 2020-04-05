@@ -1,21 +1,37 @@
 <template>
   <div id="app">
     <pageHeader />
-     <router-view />
+    <router-view />
   </div>
 </template>
 
 <script>
 import pageHeader from "./components/pageHeader.vue";
+import { mapActions } from "vuex";
 
-
+import axios from "axios";
 export default {
   name: "App",
   components: {
-    pageHeader,
+    pageHeader
+  },
+  mounted() {
+    this.updateMissions();
   },
   computed: {},
-  methods: {}
+  methods: {
+    ...mapActions(["setField"]),
+    async updateMissions() {
+      await axios
+        .get("http://localhost:3000/missions")
+        .then(response => {
+          this.setField({ field: "missions", value: response.data });
+        })
+        .catch(error => {
+          console.log("error home", error);
+        });
+    }
+  }
 };
 </script>
 
