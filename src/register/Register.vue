@@ -29,6 +29,7 @@
                 placeholder="Telefonnummer.."
                 size="large"
                 type="password"
+                @onInput="handlePhonePasswordInputOnChange"
               />
             </div>
             <div class="input-field">
@@ -77,6 +78,9 @@ export default {
     },
     handlePhoneNumberInputOnChange(event) {
       this.phoneNumber = event;
+    },
+    handlePhonePasswordInputOnChange(event) {
+      this.password = event;
     },
   },
 };
