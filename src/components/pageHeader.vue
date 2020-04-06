@@ -62,7 +62,6 @@ export default {
       router.history.current.path !== route && router.push(route);
     },
     logout() {
-      window.location.href = window.location.href;
       router.push("/");
     }
   }

@@ -58,13 +58,13 @@ export default {
   name: "Login",
   components: {
     hInput,
-    hButton,
+    hButton
   },
   data: function() {
     return {
       email: "",
       password: "",
-      error: null,
+      error: null
     };
   },
   methods: {
@@ -74,10 +74,10 @@ export default {
 
       const users = await axios
         .get("http://localhost:3000/users")
-        .then((response) => response.data)
-        .catch((error) => console.log("Fail to fetch users"));
+        .then(response => response.data)
+        .catch(error => console.log("Fail to fetch users", error));
 
-      const isAuthenticated = users.some((user) => {
+      const isAuthenticated = users.some(user => {
         console.log("USER", user);
 
         return user.email === this.email && user.password === this.password
@@ -89,13 +89,13 @@ export default {
         this.error =
           "Det gick inte att logga in, vänligen kontrollera din email och lösenord";
       }
-      const user = users.find((user) => user.email);
+      const user = users.find(user => user.email);
 
       const authenticatedUser = {
         isAuthenticated,
         userId: user.id,
         email: user.email,
-        phone: user.phonenumber,
+        phone: user.phonenumber
       };
 
       this.setField({ field: "user", value: authenticatedUser });
@@ -106,8 +106,8 @@ export default {
     },
     handlePasswordInputOnChange(event) {
       this.password = event;
-    },
-  },
+    }
+  }
 };
 </script>
 

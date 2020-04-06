@@ -69,14 +69,14 @@ export default {
   name: "Login",
   components: {
     hInput,
-    hButton,
+    hButton
   },
   data: function() {
     return {
       email: "",
       phonenumber: "",
       password: "",
-      passwordConfirmation: "",
+      passwordConfirmation: ""
     };
   },
   methods: {
@@ -103,10 +103,10 @@ export default {
     async checkIfEmailExist() {
       const users = await axios
         .get("http://localhost:3000/users")
-        .then((response) => response.data)
-        .catch((error) => console.log("Fail to fetch users"));
+        .then(response => response.data)
+        .catch(error => console.log("Fail to fetch users", error));
 
-      const isEmailOccupied = users.some((user) =>
+      const isEmailOccupied = users.some(user =>
         user.email === this.email ? true : false
       );
 
@@ -124,17 +124,17 @@ export default {
       const newUser = {
         email: this.email,
         password: this.password,
-        phonenumber: this.phonenumber,
+        phonenumber: this.phonenumber
       };
 
       await axios
         .post("http://localhost:3000/users", newUser)
-        .then((response) => console.log("REGISTER FULLFILLED", response))
-        .catch((error) => console.log("Failed to register new account", error));
+        .then(response => console.log("REGISTER FULLFILLED", response))
+        .catch(error => console.log("Failed to register new account", error));
 
       this.$router.push("/");
-    },
-  },
+    }
+  }
 };
 </script>
 

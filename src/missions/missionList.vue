@@ -39,14 +39,12 @@
 <script>
 import hButton from "../components/elements/hButton";
 import locationIcon from "../assets/locationIcon.svg";
-import confirmTakeMission from "../components/confirmTakeMission.vue";
 import axios from "axios";
 import { mapActions } from "vuex";
 export default {
   name: "missionList",
   components: {
-    hButton,
-    confirmTakeMission
+    hButton
   },
   props: {
     filterCategory: {
