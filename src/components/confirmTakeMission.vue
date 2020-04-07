@@ -125,7 +125,7 @@ export default {
     },
     async updateMissions(newMission) {
       await axios
-        .put("http://localhost:3000/missions/" + newMission.id, {
+        .put("https://helpvia-api.herokuapp.com/missions/" + newMission.id, {
           ...newMission
         })
         .catch(error => {

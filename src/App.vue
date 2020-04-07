@@ -23,7 +23,7 @@ export default {
     ...mapActions(["setField"]),
     async updateMissions() {
       await axios
-        .get("http://localhost:3000/missions")
+        .get("https://helpvia-api.herokuapp.com/missions")
         .then(response => {
           this.setField({ field: "missions", value: response.data });
         })

@@ -102,7 +102,7 @@ export default {
     },
     async checkIfEmailExist() {
       const users = await axios
-        .get("http://localhost:3000/users")
+        .get("https://helpvia-api.herokuapp.com/users")
         .then(response => response.data)
         .catch(error => console.log("Fail to fetch users", error));
 
@@ -128,7 +128,7 @@ export default {
       };
 
       await axios
-        .post("http://localhost:3000/users", newUser)
+        .post("https://helpvia-api.herokuapp.com/users", newUser)
         .then(response => console.log("REGISTER FULLFILLED", response))
         .catch(error => console.log("Failed to register new account", error));
 

@@ -73,7 +73,7 @@ export default {
       console.log("ONCLICK LOGIN");
 
       const users = await axios
-        .get("http://localhost:3000/users")
+        .get("https://helpvia-api.herokuapp.com/users")
         .then(response => response.data)
         .catch(error => console.log("Fail to fetch users", error));
 

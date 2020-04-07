@@ -104,7 +104,7 @@ export default {
     },
     async updateMissions() {
       await axios
-        .get("http://localhost:3000/missions")
+        .get("https://helpvia-api.herokuapp.com/missions")
         .then(response => {
           this.missionList = response.data;
           this.setField({ field: "missions", value: response.data });
