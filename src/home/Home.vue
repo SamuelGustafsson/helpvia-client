@@ -2,23 +2,16 @@
   <div>
     <div class="main-content-holder">
       <div class="text-holder">
-        <div class="header-text">
-          Vi finns till för att hjälpa er att hjälpa varandra genom krisen
-        </div>
+        <div class="header-text">Vi finns till för att hjälpa er att hjälpa varandra genom krisen</div>
         <div class="sub-text">
           Personer i riskgrupp kan nu få hjälp med vardagliga sysslor så de kan
-          hålla sig hemma och i säkerhet från Covid-19. <br />
-          Tillsammans kan vi rädda liv.
+          hålla sig hemma och i säkerhet från Covid-19.
+          <br />Tillsammans kan vi rädda liv.
         </div>
 
         <div class="menu-buttons">
-          <hButton
-            text="Visa uppdrag"
-            color="pink"
-            size="small"
-            @onClick="showMissions"
-          />
-          <hButton text="Skapa uppdrag" color="white" size="small" />
+          <hButton text="Visa uppdrag" color="pink" size="small" @onClick="showMissions" />
+          <hButton text="Skapa uppdrag" color="white" size="small" @onClick="createMission" />
         </div>
       </div>
       <div class="image-holder">
@@ -38,10 +31,20 @@ export default {
   components: {
     hButton
   },
+  computed: {
+    userIsAuthenticated() {
+      return this.$store.state.user && this.$store.state.user.isAuthenticated;
+    }
+  },
   methods: {
     ...mapActions(["setField"]),
     showMissions() {
       this.$router.push("missions");
+    },
+    createMission() {
+      return this.userIsAuthenticated
+        ? this.$router.push("createMission")
+        : this.$router.push("login");
     }
   }
 };

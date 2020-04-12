@@ -7,30 +7,25 @@
         class="mission-card"
       >
         <div class="mission-card-item">
-          <span class="category-label"
-            >{{ mapCategory(mission.category) }}
-          </span>
+          <span class="category-label">{{ mapCategory(mission.category) }}</span>
           <span class="Municipality-label">
             <div class="location-icon-image">
               <img :src="locationIcon" width="15px" />
             </div>
-
             {{ mission.municipality }}
           </span>
         </div>
-        <div>
-          {{ mission.freeText }}
-        </div>
+        <div>{{ mission.freeText }}</div>
 
-        <div><span class="label">Donation </span>{{ mission.donation }}</div>
-        <div class="mission-card-item">
-          <hButton
-            text="Ta uppdrag"
-            color="dusk"
-            size="small"
-            @onClick="takeMission(mission)"
-          >
-          </hButton>
+        <div>
+          <span class="label">Donation</span>
+          {{ mission.donation }}
+        </div>
+        <div v-if="userIsAuthenticated" class="mission-card-item">
+          <hButton text="Ta uppdrag" color="dusk" size="small" @onClick="takeMission(mission)"></hButton>
+        </div>
+        <div v-else>
+          <em>Du måste vara inloggad för att välja ett uppdrag</em>
         </div>
       </div>
     </div>
@@ -92,6 +87,9 @@ export default {
           value => -1 !== this.missionListParsedByMunicipality.indexOf(value)
         )
         .filter(a => a.status === "MISSION_CREATED");
+    },
+    userIsAuthenticated() {
+      return this.$store.state.user && this.$store.state.user.isAuthenticated;
     }
   },
   methods: {

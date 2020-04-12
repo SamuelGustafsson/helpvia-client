@@ -2,54 +2,40 @@
   <div class="page-holder">
     <div class="button-holder">
       <div class="add-mission-holder">
-        <div
-          class="mobile-add-button"
-          @click="expandAddMission = !expandAddMission"
-        >
+        <div class="mobile-add-button" @click="addMission">
           <img :src="plusCircleSolid" width="40px;" />
         </div>
         <div class="desktop-add-button">
-          <hButton
-            text="Lägg till uppdrag"
-            color="pink"
-            @onClick="expandAddMission = !expandAddMission"
-          />
+          <hButton text="Lägg till uppdrag" color="pink" @onClick="addMission" />
         </div>
       </div>
 
       <div class="filter-items">
         <div class="filter-item">
-          <span class="filter-text"> Filtrera: </span>
-          <hDropdown
-            label="Kategori"
-            :items="categories"
-            @onChange="onChangeCategory"
-          />
+          <span class="filter-text">Filtrera:</span>
+          <hDropdown label="Kategori" :items="categories" @onChange="onChangeCategory" />
         </div>
         <div class="filter-item">
-          <span class="filter-text"> Filtrera: </span>
-          <hDropdown
-            label="Stad"
-            :items="municipalityOptions"
-            @onChange="onChangeMunicipality"
-          />
+          <span class="filter-text">Filtrera:</span>
+          <hDropdown label="Stad" :items="municipalityOptions" @onChange="onChangeMunicipality" />
         </div>
       </div>
     </div>
     <div v-if="expandAddMission">
       <addMissionCard />
     </div>
-    <missionList
-      :filterCategory="selectedCategory"
-      :filterMunicipality="selectedMunicipality"
-    />
+    <div
+      v-else-if="invalidUser"
+      class="user-not-logged-in"
+    >Du måste logga in för att lägga till uppdrag</div>
+    <missionList :filterCategory="selectedCategory" :filterMunicipality="selectedMunicipality" />
   </div>
 </template>
 <script>
 import hDropdown from "../components/elements/hDropdown.vue";
 import hButton from "../components/elements/hButton.vue";
 import missionList from "./missionList.vue";
-import addMissionCard from "./addMissionCard.vue";
+import addMissionCard from "../components/AddMissionCard.vue";
 import municipalities from "../lib/municipalities.json";
 import plusCircleSolid from "../assets/plus-circle-solid.svg";
 
@@ -73,7 +59,8 @@ export default {
       selectedMunicipality: null,
       expandAddMission: false,
       municipalities,
-      plusCircleSolid
+      plusCircleSolid,
+      invalidUser: null
     };
   },
   computed: {
@@ -94,6 +81,14 @@ export default {
       this.selectedMunicipality = this.municipalityOptions.find(
         a => a.value === event
       );
+    },
+    addMission() {
+      if (this.$store.state.user && this.$store.state.user.isAuthenticated) {
+        this.expandAddMission = !this.expandAddMission;
+        this.invalidUser = false;
+      } else {
+        this.invalidUser = true;
+      }
     }
   }
 };
@@ -169,5 +164,9 @@ export default {
   @media screen and (min-width: 750px) {
     display: block;
   }
+}
+.user-not-logged-in {
+  text-align: left;
+  padding-top: 5px;
 }
 </style>
